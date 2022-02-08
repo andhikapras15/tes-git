@@ -1,0 +1,60 @@
+<script>
+    let namaBuah1 = 'Apel'
+    let namaBuah2 = 'Anggur'
+    let namaBuah3 = 'Jeruk' 
+    
+    let hargaBuah1 = 10000 
+    let hargaBuah2 = 20000 
+    let hargaBuah3 = 30000 
+    
+    let stockApel = 10
+    let stockAnggur = 10
+    let stockJeruk = 10 
+
+    alert (`daftar harga buah : 
+    1. ${namaBuah1} = ${hargaBuah1}, stock = ${stockApel}
+    2. ${namaBuah2} = ${hargaBuah2}, stock = ${stockAnggur}
+    3. ${namaBuah3} = ${hargaBuah3}, stock = ${stockJeruk}`) 
+    
+    do {
+        qty1 = (parseInt(prompt(`silahkan masukkan jumlah ${namaBuah1} yang diinginkan, stock = 10`))) 
+        if (qty1>stockApel) {
+        alert(`mohon maaf hanya tersedia ${stockApel}`)
+    } 
+}while (qty1>stockApel)
+    do {
+        qty2 = (parseInt(prompt(`silahkan masukkan jumlah ${namaBuah2} yang diinginkan, stock = 10`))) 
+        if (qty2>stockAnggur) {
+        alert(`mohon maaf hanya tersedia ${stockAnggur}`)
+    }
+}while (qty2>stockAnggur)
+    do {
+     qty3 = (parseInt(prompt(`silahkan masukkan jumlah ${namaBuah3} yang diinginkan, stock = 10`))) 
+    if (qty3>stockJeruk) {
+        alert(`mohon maaf hanya tersedia ${stockJeruk}`)
+    } 
+}while (qty3>stockJeruk)
+    
+    let total = (qty1*hargaBuah1) + (qty2*hargaBuah2) + (qty3*hargaBuah3)
+    
+    
+    let bayar = parseInt (prompt (`total belanjaan 
+    1. ${namaBuah1} : ${qty1} x ${hargaBuah1} = ${qty1*hargaBuah1} 
+    2. ${namaBuah2} : ${qty2} x ${hargaBuah2} = ${qty2*hargaBuah2}
+    3. ${namaBuah3} : ${qty3} x ${hargaBuah3} = ${qty3*hargaBuah3}
+    total belanjaan = ${total} 
+    silahkan masukkan nominal uang`))
+
+    do {
+    if (bayar===total) {
+        alert('uang pas')
+    }else if (bayar>total) {
+        alert('uang kelebihan bos')
+    }else (bayar<total);{
+        prompt(`uang kurang ${total-bayar} lagi bro`)
+    }
+}while (bayar===total)
+    
+
+
+    </script>

@@ -1,0 +1,66 @@
+<script>
+    let namaBuah1=(`apel`)
+    let namaBuah2=(`anggur`)
+    let namaBuah3=(`jeruk`)
+
+    let hargaBuah1 = 10000
+    let hargaBuah2 = 15000
+    let hargaBuah3 = 20000 
+
+    let stockApel = 20
+    let stockAnggur = 30 
+    let stockJeruk = 40 
+    let qty1
+    let qty2
+    let qty3
+    alert(`daftar buah : 
+    1. ${namaBuah1} : Rp. ${hargaBuah1}
+    2. ${namaBuah2} : Rp. ${hargaBuah2}
+    3. ${namaBuah3} : Rp. ${hargaBuah3} 
+    
+    Stock Apel : ${stockApel}
+    stock Anggur : ${stockAnggur}
+    stock Jeruk : ${stockJeruk}`)
+ 
+    do { qty1 = prompt(`mau beli ${namaBuah1} berapa ?`)
+        console.log(`hanya tersedia ${stockApel}, silahkan masukkan jumlah kembali`)
+    } while (qty1 < 1000) {
+        break
+    }
+    let qty2 = parseInt (prompt(`mau beli ${namaBuah2} berapa ?`)) 
+    do (qty2 > stockAnggur); { 
+        console.log(`hanya tersedia ${stockAnggur}, silahkan masukkan jumlah kembali`)
+    }
+    let qty3 = parseInt (prompt(`mau beli ${namaBuah3} berapa ?`))
+    do (qty3 > stockJeruk); { 
+        console.log(`hanya tersedia ${stockJeruk}, silahkan masukkan jumlah kembali`)
+    }while (qty1 > stockApel) { 
+        console.log(`hanya tersedia ${stockApel}, silahkan masukkan jumlah kembali`)
+    }
+if) (`qty1 > ${stockApel}`){
+    qty1 = `20`
+}else if (`qty2 > ${stockAnggur}`){
+    qty2 = `30` 
+}else (`qty3 >${stockJeruk}`);{
+    qty3 = `40`
+}
+
+    let total = (qty1*hargaBuah1) + (qty2*hargaBuah2) + (qty3*hargaBuah3)
+
+   alert(`daftar belanja :
+    1. ${namaBuah1} : ${qty1} x Rp. ${hargaBuah1} = Rp. ${qty1*hargaBuah1}
+    2. ${namaBuah2} : ${qty2} x Rp. ${hargaBuah2} = Rp. ${qty2*hargaBuah2}
+    3. ${namaBuah3} : ${qty3} x Rp. ${hargaBuah3} = Rp. ${qty3*hargaBuah3}
+    total : Rp.${total}`)
+    
+    let nominalUang = parseInt(prompt(`masukkan nominal uang yang ingin dibayarkan`)) 
+
+if(nominalUang <total){
+    alert(`nominal uang yang dimasukkan kurang`)
+}else if(nominalUang ===total){
+    alert(`uang pas`)
+}else {
+    alert(`uang yang dibayarkan lebih`)
+}
+</script>
+</html>
