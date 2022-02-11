@@ -72,6 +72,14 @@
                     {kegiatan,gambar,hari}
                 )
                 renderData( )
+            } 
+            const editData = ()=>{
+                let kegiatanEdit = document.getElementById('aktivitasedit').value
+                let gambarEdit = document.getElementById('gambaredit').value 
+                let hariEdit = document.getElementById('hariEdit').value 
+                data.splice(indexEd,1,{kegiatan:kegiatanEdit,Image:gambarEdit,hari:hariEdit}) 
+                indexEd=-1
+                renderData()
             }
         </script> 
     
