@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="pr.js" defer></script>
     <title>market</title> 
     <style>
         table,tr,td,th{
@@ -12,11 +13,10 @@
             padding: 10px;
         }
         form{
-            width: 60%;
+            width: 80%;
             margin: 0 auto;
         }
     </style> 
-    <script src="pr.js" defer></script>
 </head>
 <body> 
     <div>
@@ -60,17 +60,30 @@
             <legend>Tabel data</legend> 
             <table>
                 <thead>
-                    <tr>
                         <th>ID.</th>
                         <th>category</th>
                         <th>Nama</th>
                         <th>Price</th> 
-                        <th>Stock</th>
-                    </tr>
+                        <th>Stock</th> 
+                        <th>Buy</th> 
+                        <th colspan="2">Action</th>
                 </thead> 
                 <tbody id="data">
 
                 </tbody>
+            </table>
+        </fieldset> 
+        <fieldset>
+            <legend>Cart</legend>
+            <table>
+                <thead>
+                    <th>ID.</th>
+                        <th>category</th>
+                        <th>Nama</th>
+                        <th>Price</th> 
+                        <th>Stock</th> 
+                        <th colspan="2">Action</th>
+                </thead>
             </table>
         </fieldset>
     </div>
