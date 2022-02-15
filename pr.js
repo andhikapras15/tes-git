@@ -7,8 +7,17 @@ let data = [
 
 let indexDel = -1
 let indexEd = -1
+let carts = []
 
-let Category= ['Fast Food','Electronic','cloth','Fruit']
+let Category= ['Fast Food','Electronic','cloth','Fruit'] 
+
+const convertCurrency =(numb)=>{
+    const formatter = new Intl.NumberFormat(`id-ID`,{
+        style: 'currency',
+        currency: 'IDR',
+    }) 
+    return formatter.format(numb)
+}
 
 const initialRender = ()=>{
     let output1 = `<option value="">All</option>` 
@@ -42,9 +51,11 @@ const renderData = (arr)=>{
                 <td>${val.id}</td>
                 <td>${val.Category}</td>
                 <td>${val.nama}</td>
-                <td>${val.price}</td> 
-                <td>${val.stock}</td> 
+                <td>${convertCurrency(val.price)}</td> 
+                <td>${val.stock}</td>  
                 <td>
+                    <button onclick="productsBuy(${index})"disable>Buy</button>
+                </td>
                     <button onclick="yesDelete()">yes</button>
                     <button onclick="cancelDelete()">no</button> 
                 <td>
@@ -53,15 +64,18 @@ const renderData = (arr)=>{
         } else if(index === indexEd){
             return (
                 `<tr>
-                    <td>${val.id}<td>
+                    <td>${val.id}</td>
                     <td>
                         <select id='categoryEdit'>
                         ${generateDefaultCat(val.Category)} 
                         </select> 
-                    <td>
+                    </td>
                     <td><input type="text" value="${val.nama} id="namaEdit> </td>
                     <td><input type="text" value="${val.price} id="priceEdit> </td>
                     <td><input type="number" value="${val.stock} id="stockEdit> </td>
+                    <td>
+                    <button onclick="productsBuy(${index})"disable>Buy</button>
+                    </td>
                     <td> 
                     <button>Save</button>
                     <button onclick="cancelEdit()">Cancel</button> 
@@ -76,8 +90,11 @@ const renderData = (arr)=>{
                 <td>${val.id}</td>
                 <td>${val.Category}</td>
                 <td>${val.nama}</td>
-                <td>${val.price}</td> 
-                <td>${val.stock}</td> 
+                <td>${convertCurrency(val.price)}</td> 
+                <td>${val.stock}</td>  
+                <td>
+                    <button onclick="productsBuy(${index})"disable>Buy</button>
+                </td>
                 <td>
                     <button onclick="confEdit(${index})">Edit</button>
                     <button onclick="conflDelete(${index})">Delete</button> 
@@ -90,8 +107,37 @@ const renderData = (arr)=>{
     el.innerHTML = output.join('')
 } 
 
+// initialRender()
+// renderData(data)
+
+const renderCarts = ()=>{
+    let cartsEl = document.getElementById('carts')
+    let output = carts.map((val,index)=>{
+        return  `
+        <tr>
+            <td>${val.id}</td>
+            <td>${val.Category}</td>
+            <td>${val.nama}</td> 
+            <td>${convertCurrency(val.price)}</td>   
+            <td>${val.stock}</td> 
+            <td>
+            <button onclick="onDeleteCart(${index})">Delete</button>
+            </td>
+        </tr>`
+    }) 
+    
+    cartsEl.innerHTML = output.join('') 
+    let paysEl = document.getElementById('pay-container')
+    if(carts.length){
+        paysEl.innerHTML = `<button onclick="payment()">Pay</button>`
+    }else {
+        paysEl.innerHTML= ''
+    }
+}
+
 initialRender()
-renderData(data)  
+renderData(data)   
+renderCarts()
 
 const inputData = ()=>{ 
     let Nama = document.getElementById('inputNama').value
@@ -110,13 +156,6 @@ const inputData = ()=>{
     document.getElementById('inputCategory').value =''
 }  
 renderData(data) 
-
-const addCart = ()=>{ 
-    [{id:id ,Category: Category, nama: nama, price: price, stock: stock}]
-    data.push({id:time.getTime(),nama:Nama,price:Price,stock:Stock,Category:category}) 
-    
-    renderData(data)
-}
 
 const filterByNama = ()=>{ 
     let namaFilter = document.getElementById('namaFilter').value
@@ -188,6 +227,38 @@ const yesDelete = ()=>{
     renderData(data)
 } 
 
+const productsBuy = (index)=>{
+    carts.push(data[index])
+    renderCarts()
+}
+
+const onDeleteCart=(index)=>{
+    carts.splice(index,1)
+    renderCarts()
+} 
+
+const payment=()=>{
+    let strukEl = document.getElementById('struk')
+    let subTotalEl = document.getElementById('subTotal')
+    let ppnEl = document.getElementById('ppn')
+    let totalEl = document.getElementById('total') 
+
+    let strukOutput = carts.map((val)=>{
+        return `${val.id} | ${val.Category} | ${val.nama} | ${convertCurrency(val.price)}<br><br>`
+    })
+    strukEl.innerHTML = strukOutput.join('')
+
+    let subTotal = carts.reduce((prevVal,currVal)=>{
+        return prevVal +currVal.price
+    },0)  
+
+    let ppn= subTotal*0.1 
+    let grandTotal  = subTotal+ppn 
+
+    subTotalEl.innerHTML = `subTotal ${convertCurrency(subTotal)}` 
+    ppnEl.innerHTML = `PPN ${convertCurrency(ppn)}`
+    totalEl.innerHTML = `Grand Total ${convertCurrency(grandTotal)}`
+}
 
 // const inputData = ()=>{ 
 //     let Nama = document.getElementById('inputNama').value
